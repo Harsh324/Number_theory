@@ -1,0 +1,86 @@
+## Primality Test
+
+    ** Primality test is to determine whether the input is a prime number or not.
+
+        Ex , 5 is prime but 12 is not prime 
+
+
+    ## Approach 1:
+
+        ** Naive Approach
+
+        bool isPrime(int Num)
+        {
+            if(Num == 1)
+                return false;
+            for(int i = 2; i < Num; i++)
+            {
+                if(Num % i == 0)
+                    return false;
+            }
+            return true;
+        }
+
+        Time Complexity : O(N)
+
+
+    
+    ## Approach 2 :
+
+        ** All Divisors of a number N occurs in pairs of (a, b) such that a * b = N
+
+        ** Ex : Divisors of 12 are -> 1, 2, 3, 4, 6, 12
+           pairs are : (1, 12), (2, 6), (3, 4)
+
+
+
+        ** Claim : For a Divisor pair (a, b) one of them lies below sqqrt(N) and other,
+                   lies above sqrt(N).
+
+        ** Proof : There would be three cases
+
+            Case 1 : Both a and b are below sqrt(N)
+
+                Lets assume that this statement is true, hence a < sqrt(N) and b < sqrt(N),
+                but then a * b < N, Which contradicts the fact that a * b = N.
+                Hence, Case 1 is not true.
+
+            Case 2 : Both a and b are above sqrt(N)
+
+                Lets assume that this statement is true, hence a > sqrt(N) and b > sqrt(N),
+                but then a * b > N, Which contradicts the fact that a * b = N.
+                Hence, Case 2 is not true.
+
+            Case 1 : one is below sqrt(N), and above sqrt(N)
+
+                a = sqrt(N) * sqrt(N) / b    ---- eq(1)
+                subcase 1 : b < sqrt(N)      gives 1 < sqrt(N) / b
+                            a = sqrt(N) * (1 + x)
+                        hence a > sqrt(N)
+
+                subcase 2 : b > sqrt(N)      gives 1 > sqrt(N) / b
+                            a = sqrt(N) * (1 - x)
+                        hence a < sqrt(N)
+
+
+
+        bool isPrime(int Num)
+        {
+            if(Num == 1)
+                return false;
+
+            for(int i = 2; i*i < = Num; i++)
+            {
+                if(Num % i == 0)
+                    return false;
+            }
+            return true;
+        }
+
+        Time Complexity : O(sqrt(N))
+
+
+
+    ## Practice problems on Primality test
+
+        
